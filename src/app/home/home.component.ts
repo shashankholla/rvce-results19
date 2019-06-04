@@ -51,10 +51,7 @@ export class HomeComponent implements OnInit {
       this.database.list(this.dbPath).snapshotChanges().subscribe(data =>
         {
           this.studentDetails=data;
-          this.studentDetails.forEach(detail =>
-            {
-              console.log(detail.key+":"+detail.payload.val());
-            });
+          this.consoleLog(); //This callback function is only exceuted once async data fetching is done
         });
     }      
   }
@@ -126,5 +123,12 @@ export class HomeComponent implements OnInit {
     }
     
     this.dbPath="/"+semester+"/"+this.selectedBranch+"/"+"1RV"+this.selectedYear+branchCode+this.usnNo;
+  }
+  consoleLog()
+  {
+    this.studentDetails.forEach(detail =>
+            {
+              console.log(detail.key+":"+detail.payload.val());
+            });
   }
 }

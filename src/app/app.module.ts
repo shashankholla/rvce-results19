@@ -12,17 +12,24 @@ import {MatButtonModule} from '@angular/material';
 import {MatFormFieldModule} from '@angular/material';
 import {MatSelectModule} from '@angular/material/select'; 
 import {MatCardModule} from '@angular/material';
-import {MatInputModule} from '@angular/material'
+import {MatInputModule} from '@angular/material';
+import {MatGridListModule} from '@angular/material'
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {AngularFireModule} from 'angularfire2'
 import {AngularFireDatabaseModule} from 'angularfire2/database';
 import { environment } from '../environments/environment';
+import { LoadingComponent } from './loading/loading.component';
+import {MatProgressSpinnerModule} from '@angular/material'
+import {MatIconModule} from '@angular/material/icon'
+
+
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     ResultComponent,
     ToolbarComponent,
+    LoadingComponent,
     
   ],
   imports: [
@@ -39,7 +46,12 @@ import { environment } from '../environments/environment';
     MatInputModule,
     FlexLayoutModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    MatGridListModule,
+    MatProgressSpinnerModule,
+    MatIconModule
+     
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

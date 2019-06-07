@@ -1,3 +1,100 @@
-<p>
-  result works!
-</p>
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+<script src="/public/node_modules/chart.js/dist/Chart.js"></script>
+<div name="displayData1"  >
+  <div class="container" >
+      <div class="row">
+        <div class="col-sm-12">
+                <mat-card class="mat-card-d shadow p-3 bg-white rounded">
+                    <div class="mat-subheading-1"> Name</div>
+                <div name="name-now" class="mat-title name-card" >{{name}}</div>
+                </mat-card>
+        </div>
+      </div>
+      <table style="width: 100%;padding: 5px">
+        <tr>
+          <td>
+          <div flex="">
+              <mat-card class="top-card">
+                  <div class="mat-subheading-1"> Your SGPA</div>
+                  <mat-card-content class="top-content" name="SGPA-now" style="">{{sgpa}}</mat-card-content>
+              </mat-card>
+          </div>
+        </td>
+        
+     <!--    <td>
+            <div flex="">
+                    <mat-card class="card shadow  p-3 bg-white rounded" style="min-height: 100px;min-width: 100px; padding:5px;margin:10px">
+                        <div class="mat-subheading-2"> Your CGPA</div>
+                        <mat-card-content name="avgSGPA-now" style="text-align:center; float:left;font-size: 50px">{{cgpa}}</mat-card-content>
+                    </mat-card>
+                </div>
+              </td>
+     -->     
+            <td>
+         <div flex="">
+                  <mat-card class="top-card" >
+                      <div class="mat-subheading-1"> Avg. branch SGPA</div>
+                      <mat-card-content class="top-content" name="avgSGPA-now" style="">{{averageSGPA}}</mat-card-content>
+                  </mat-card>
+              </div>
+            </td>
+          
+              
+                  <td>
+              <div flex="">
+                      <mat-card class="top-card" >
+                          <div class="mat-subheading-1"> Your rank</div>
+                          <mat-card-content class="top-content" name="rank-now" style="">{{rank}}</mat-card-content>
+                      </mat-card>
+                  </div>
+                </td>
+              </tr>
+                </table>
+  </div>
+
+
+  <mat-card class="mat-card-d"  style="margin-bottom: 100px" >
+
+      <div class="container">
+
+          <div class="row" style="text-align: -webkit-center">
+          
+            <table >
+             
+              <tr *ngFor="let d of subs">
+                <td align="center" style="color: black">
+                  <mat-card>
+                   <div style="height: 40px;vertical-align: middle">
+                    <div id="float1" style="text-align:center;vertical-align:middle;width:75%;float:left;">{{d[0]}}</div>
+                    <div id="float1" style="text-align:center;width:25%;float:left;font-size: 50px">{{d[1]}}</div>
+                  </div>
+                  </mat-card>
+                  </td>
+                
+              </tr>
+            
+            </table>
+          </div>
+          <div>
+              <canvas #canvas id="canvas">{{ canvas }}</canvas>
+          </div>
+      </div>
+  
+  </mat-card>
+</div>
+<style>
+  .footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: black;
+    color: grey;
+    text-align: center;
+    padding: 2px;
+  }
+  </style>
+  
+  <div class="footer">
+    <p>Created by Nagendra Kumar Jamadagni and Shashank Holla</p>
+  </div> 

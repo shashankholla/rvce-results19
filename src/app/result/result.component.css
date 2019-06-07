@@ -1,0 +1,41 @@
+.mat-card-d{
+    min-height: 100px;min-width: 100px; padding:5px;margin:10px
+}
+
+.name-card{
+    text-align:center;
+     float:left;
+    font-size: 50px;
+}
+
+.top-card
+{
+    padding: 3px;
+   min-height:70px;
+}
+.top-content{
+    text-align:center; 
+    float:left;
+    font-size: 50px;
+    
+}
+@media only screen and (max-width: 600px) {
+    .mat-card-d{
+        min-height: 100px;min-width: 100px; padding:5px;margin:10px
+    }
+
+    .top-card
+    {
+      padding: 3px
+    }
+    .top-content{
+        text-align:center; 
+        float:left;
+        font-size: 30px
+    }
+    .name-card{
+        text-align:center;
+         float:left;
+        font-size: 25px;
+    }
+  }

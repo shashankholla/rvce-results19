@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MatButton} from '@angular/material';
+import { Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-toolbar',
@@ -7,10 +8,17 @@ import {MatButton} from '@angular/material';
   styleUrls: ['./toolbar.component.css']
 })
 export class ToolbarComponent implements OnInit {
-
-  constructor() { }
+backShow : boolean = false;
+  constructor(public router : Router) { }
 
   ngOnInit() {
+    if(this.router.url == "results")
+    {
+      this.backShow = true;
+    }
+    else{
+      this.backShow = false;
+    }
   }
 
 }

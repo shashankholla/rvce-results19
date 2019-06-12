@@ -4,6 +4,11 @@ import { Router } from '@angular/router';
 import {AngularFireDatabase} from "angularfire2/database";
 import {Observable} from "rxjs";
 import { database } from 'firebase';
+import { SharedService } from '../shared-service';
+import { async } from 'q';
+
+
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -31,29 +36,95 @@ export class HomeComponent implements OnInit {
   "CHEMICAL",
   "MECHANICAL",]
   dbPath:string;
+  averagePath:string; 
+  gpas:string;
   courses:any[];
   studentDetails:any[];
+  branchAverage:any;
+  loading : boolean = false;
   constructor(private database:AngularFireDatabase ,
-    public router : Router ) {}
+    public router : Router, private sharedService: SharedService ) {}
   
-  ngOnInit() {}
+  ngOnInit() {
+    this.loading = false;
+    console.log("Came here")
+    this.sharedService.currentData.subscribe(message => this.studentDetails = message)
+  }
   submit(){
+    this.loading = true;
+    ////console.log("Clicked" + this.loading)
+
     if(this.selectedYear==-1 || this.selectedBranch==-1 || this.usnNo.length != 3)
     {
       this.error = true;
+      this.loading = false; 
     }
     else
     {
       this.error=false;
       this.getPath();
-      //Here data is being fetched properly. Issue is, this is an Async call. So we have to find a way to
-      //wait until call is finished.
-      this.database.list(this.dbPath).snapshotChanges().subscribe(data =>
+      
+      ////console.log('making call ' + this.dbPath)
+
+      
+      this.database.list(this.dbPath).snapshotChanges().subscribe(async data =>
         {
-          this.studentDetails=data;
-          this.consoleLog(); //This callback function is only exceuted once async data fetching is done
+          await this.updateStudentDetails(data);
+
+          
+          //This callback function is only exceuted once async data fetching is done
         });
+
+      ////console.log("Got student details")
+
+      this.database.list(this.gpas).snapshotChanges().subscribe(async data =>
+        {
+          
+          await this.updateGPAS(data);
+          
+         // ////console.log("GPAS")
+         // ////console.log(data)
+        }
+      );
+      
+      this.database.list(this.averagePath).snapshotChanges().subscribe(async data =>
+        {
+          
+          await this.updateAverageDetails(data[0].payload.val());
+       
+          ////console.log("AV")
+          ////console.log(this.branchAverage)
+        }
+
+                  
+
+      );
+      if( this.studentDetails.length == 0)
+      {//console.log("Empty");
+      this.error=true;
+      this.loading = false;
+      return;
+
+      }
+    this.studentDetails = []
+    this.router.navigate(['result'])
+      
+
     }      
+  }
+  updateGPAS(data){
+    this.sharedService.changeGPA(data);
+  }
+
+  updateStudentDetails(data){
+    this.sharedService.changeM(data);
+  }
+
+  updateAverageDetails(data){
+
+    this.sharedService.changeAvg(data);
+                  
+
   }
   getPath()
   {
@@ -63,19 +134,19 @@ export class HomeComponent implements OnInit {
     {
       //Semesters should be changed to 8 6 4 2 after uploading new dataset
       case "15":
-        semester="Semester 6";
+        semester="Semester 8";
         break;
       case "16":
-        semester="Semester 4";
+        semester="Semester 6";
         break;
       case "17":
-        semester="Semester 2";
+        semester="Semester 4";
         break;
       case "18":
-        semester="Semester 1";
+        semester="Semester 2";
         break;
       default:
-        console.log("Invalid Semester");
+        ////console.log("Invalid Semester");
         break;
     }
     switch(this.selectedBranch)
@@ -118,17 +189,21 @@ export class HomeComponent implements OnInit {
         break;
                                 
       default:
-        console.log("Invalid branch");
+        ////console.log("Invalid branch");
         break;
     }
     
-    this.dbPath="/"+semester+"/"+this.selectedBranch+"/"+"1RV"+this.selectedYear+branchCode+this.usnNo;
+    this.dbPath="/data/" + semester+"/"+this.selectedBranch+"/"+"1RV"+this.selectedYear+branchCode+this.usnNo;
+    this.averagePath = "/data/"+semester+"/"+this.selectedBranch+"/"+"AVERAGE";
+    this.gpas = "/gpas/" + semester + "/" + this.selectedBranch;
   }
   consoleLog()
   {
-    this.studentDetails.forEach(detail =>
-            {
-              console.log(detail.key+":"+detail.payload.val());
-            });
+    ////console.log(typeof(this.studentDetails))
+    
+
+
+    
+    
   }
 }

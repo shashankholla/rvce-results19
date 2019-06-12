@@ -1,14 +1,14 @@
 <!-- <mat-form-field>
   <div class="login-box" layout="row" layout-align="center center">
-  <div style="display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;">
-  <mat-card >
-    1RV
-  </mat-card>
-
-
-  <mat-select [(ngModel)]="selectedValue" (change)="selected($event)" name="yearDropdown">
+    <div style="display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;">
+    <mat-card >
+      1RV
+    </mat-card>
+    
+    
+    <mat-select [(ngModel)]="selectedValue" (change)="selected($event)" name="yearDropdown">
       <mat-option *ngFor="let year of years" [value]="year">
         {{year}}
       </mat-option>
@@ -25,50 +25,60 @@
 <!-- <div fxLayout="row wrap" fxLayoutGap="32px" fxLayoutAlign="flex-start">
   <mat-card>1-</mat-card>
   <mat-card style="width:100px;"> <mat-select matInput  [(ngModel)]="selectedValue" (change)="selected($event)" name="yearDropdown">
-      <mat-option *ngFor="let year of years" [value]="year">
-        {{year}}
-      </mat-option>
-    </mat-select></mat-card>
-
+    <mat-option *ngFor="let year of years" [value]="year">
+      {{year}}
+    </mat-option>
+  </mat-select></mat-card>
+  
 </div> -->
-<mat-card name="background"  class="mat-card-c"> <mat-card-header>
- 
-  <mat-card-title>Enter your USN</mat-card-title>
- 
-</mat-card-header> 
-<mat-card-content>
-  <mat-card>1RV</mat-card>
-  
- 
+<mat-card name="background" class="mat-card-c">
+  <div>
+    <mat-card-header>
+      <mat-card-title>Enter your USN</mat-card-title>
 
-<mat-card>
-<mat-select [(ngModel)]="selectedYear"  [value] = "selectedYear">
-  <mat-option disabled [value] = '-1'>Select Year</mat-option>
-  <mat-option *ngFor="let year of years" [value]="year">
-    {{year}}
-  </mat-option>
-</mat-select>
-</mat-card>
-<mat-card>
-    <mat-select [(ngModel)]="selectedBranch" [value] = "selectedBranch">
-      <mat-option disabled [value] = '-1'>Select Branch</mat-option>
-      <mat-option *ngFor="let branch of branches" [value]="branch">
-        {{branch}}
-      </mat-option>
-    </mat-select>
-    </mat-card>
-    <mat-card>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-card>1RV</mat-card>
+
+
+
+      <mat-card>
+        <mat-select [(ngModel)]="selectedYear" [value]="selectedYear">
+          <mat-option disabled [value]='-1'>Select Year</mat-option>
+          <mat-option *ngFor="let year of years" [value]="year">
+            {{year}}
+          </mat-option>
+        </mat-select>
+      </mat-card>
+      <mat-card>
+        <mat-select [(ngModel)]="selectedBranch" [value]="selectedBranch">
+          <mat-option disabled [value]='-1'>Select Branch</mat-option>
+          <mat-option *ngFor="let branch of branches" [value]="branch">
+            {{branch}}
+          </mat-option>
+        </mat-select>
+      </mat-card>
+      <mat-card>
+
+
+        <input [(ngModel)]="usnNo" type="text" name="usnNo" maxlength="3" [value]="usnNo"><br>
+
+
+
+      </mat-card>
+    </mat-card-content>
+    <mat-card-actions style="display: inline-block">
+      
+
+       
+      <button mat-raised-button color="primary" style="float:left" [disabled]="loading" (click)="submit()">SUBMIT</button>
+      <div *ngIf="loading" style="float: left">
+          <mat-progress-spinner diameter="25" mode="indeterminate" ></mat-progress-spinner>
+         </div>
+     
+    </mat-card-actions>
+    <div *ngIf="error" style="color: red;">Fill the USN properly</div>
    
-         
-       <input [(ngModel)]="usnNo" type="text" name="usnNo" maxlength="3" [value]="usnNo"><br>
-         
-        
-        
-    </mat-card>
-  </mat-card-content>
-<mat-card-actions>
-  <button mat-raised-button color="primary" (click)="submit()">SUBMIT</button>
+  </div>
   
-</mat-card-actions>
-<div *ngIf="error" style="color: red">Fill the USN properly</div>
 </mat-card>

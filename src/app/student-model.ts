@@ -3,8 +3,4 @@ export class Student{
     usn:string
     cgpa:string
     sgpa:string
-    
-
-
-
 }

@@ -32,7 +32,7 @@ export class HomeComponent implements OnInit {
   "ELECTRONICS AND INSTRUMENTATION",
   "COMPUTER SCIENCE AND",
   "INDUSTRIAL AND MANAGEMENT",
-  "TELECOMMUNICATION	",
+  "TELECOMMUNICATION",
   "CHEMICAL",
   "MECHANICAL",]
   dbPath:string;
@@ -47,14 +47,11 @@ export class HomeComponent implements OnInit {
   
   ngOnInit() {
     this.loading = false;
-    console.log("Came here")
     this.sharedService.currentData.subscribe(message => this.studentDetails = message)
   }
   submit(){
     
     this.loading = true;
-    ////console.log("Clicked" + this.loading)
-
     if(this.selectedYear==-1 || this.selectedBranch==-1 || this.usnNo.length != 3)
     {
       this.error = true;
@@ -64,10 +61,6 @@ export class HomeComponent implements OnInit {
     {
       this.error=false;
       this.getPath();
-      
-      ////console.log('making call ' + this.dbPath)
-
-      
       this.database.list(this.dbPath).snapshotChanges().subscribe(async data =>
         {
           await this.updateStudentDetails(data);
@@ -124,10 +117,7 @@ export class HomeComponent implements OnInit {
   }
 
   updateAverageDetails(data){
-
     this.sharedService.changeAvg(data);
-                  
-
   }
   getPath()
   {
@@ -135,7 +125,6 @@ export class HomeComponent implements OnInit {
     var branchCode:string;
     switch(this.selectedYear)
     {
-      //Semesters should be changed to 8 6 4 2 after uploading new dataset
       case "15":
         semester="Semester 8";
         break;
@@ -147,9 +136,6 @@ export class HomeComponent implements OnInit {
         break;
       case "18":
         semester="Semester 2";
-        break;
-      default:
-        ////console.log("Invalid Semester");
         break;
     }
     switch(this.selectedBranch)
@@ -190,23 +176,10 @@ export class HomeComponent implements OnInit {
       case "MECHANICAL":
         branchCode="ME";
         break;
-                                
-      default:
-        ////console.log("Invalid branch");
-        break;
     }
     
     this.dbPath="/data/" + semester+"/"+this.selectedBranch+"/"+"1RV"+this.selectedYear+branchCode+this.usnNo;
     this.averagePath = "/data/"+semester+"/"+this.selectedBranch+"/"+"AVERAGE";
     this.gpas = "/gpas/" + semester + "/" + this.selectedBranch;
-  }
-  consoleLog()
-  {
-    ////console.log(typeof(this.studentDetails))
-    
-
-
-    
-    
   }
 }

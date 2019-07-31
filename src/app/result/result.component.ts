@@ -31,8 +31,6 @@ export class ResultComponent implements OnInit {
     this.sharedService.avgData.subscribe(message => this.averageSGPA = ((parseFloat(message)).toPrecision(2)).toString());
     
     
-    //////console.log("Printing average")
-    //////console.log(this.averageSGPA)
     
     this.studentDetails.forEach(detail =>
       {
@@ -78,7 +76,6 @@ export class ResultComponent implements OnInit {
         });
        this.gpaData = this.gpaData.sort((a,b) => (a>b) ? 1 : -1)
 
-      ////console.log(this.gpaNumData);
       
       var gpaS = {};   
       this.gpaNumData.forEach(x => {
@@ -102,7 +99,6 @@ export class ResultComponent implements OnInit {
       });
 
 
-     ////console.log(gpaS)
 
 
 

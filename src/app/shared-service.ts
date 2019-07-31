@@ -32,5 +32,4 @@ export class SharedService {
     {
       this.data.next(m)
     }
-  
 }

@@ -32,18 +32,18 @@
   
 </div> -->
 <mat-card name="background" class="mat-card-c">
-  <div>
+  <div class="">
     <mat-card-header>
       <mat-card-title>Enter your USN</mat-card-title>
 
     </mat-card-header>
     <mat-card-content>
-      <mat-card>1RV</mat-card>
+      <mat-card class="animated fadeIn">1RV</mat-card>
 
 
 
       <mat-card>
-        <mat-select [(ngModel)]="selectedYear" [value]="selectedYear">
+        <mat-select class="animated fadeIn" [(ngModel)]="selectedYear" [value]="selectedYear">
           <mat-option disabled [value]='-1'>Select Year</mat-option>
           <mat-option *ngFor="let year of years" [value]="year">
             {{year}}
@@ -51,7 +51,7 @@
         </mat-select>
       </mat-card>
       <mat-card>
-        <mat-select [(ngModel)]="selectedBranch" [value]="selectedBranch">
+        <mat-select class="animated fadeIn" [(ngModel)]="selectedBranch" [value]="selectedBranch">
           <mat-option disabled [value]='-1'>Select Branch</mat-option>
           <mat-option *ngFor="let branch of branches" [value]="branch">
             {{branch}}
@@ -61,7 +61,7 @@
       <mat-card>
 
 
-        <input [(ngModel)]="usnNo" type="text" name="usnNo" maxlength="3" [value]="usnNo"><br>
+        <input class="animated fadeIn"[(ngModel)]="usnNo" type="text" name="usnNo" maxlength="3" [value]="usnNo"><br>
 
 
 
@@ -71,7 +71,7 @@
       
 
        
-      <button mat-raised-button color="primary" style="float:left" [disabled]="loading" (click)="submit()">SUBMIT</button>
+      <button [ngClass]="{'animated shake': selectedIndex == 1}" #submitButton mat-raised-button color="primary" style="float:left" [disabled]="loading" (click)="submit()">SUBMIT</button>
       <div *ngIf="loading" style="float: left">
           <mat-progress-spinner diameter="25" mode="indeterminate" ></mat-progress-spinner>
          </div>

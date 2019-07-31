@@ -16,7 +16,7 @@ import { async } from 'q';
 })
 
 export class HomeComponent implements OnInit {
-  
+  selectedIndex:number = 0;
   selectedYear:any = -1
   selectedBranch:any = -1
   usnNo="000"
@@ -51,6 +51,7 @@ export class HomeComponent implements OnInit {
     this.sharedService.currentData.subscribe(message => this.studentDetails = message)
   }
   submit(){
+    
     this.loading = true;
     ////console.log("Clicked" + this.loading)
 
@@ -70,44 +71,46 @@ export class HomeComponent implements OnInit {
       this.database.list(this.dbPath).snapshotChanges().subscribe(async data =>
         {
           await this.updateStudentDetails(data);
-
+          
+          if( this.studentDetails.length == 0)
+          {//console.log("Empty");
+          this.error=true;
+          this.loading = false;
+          this.selectedIndex = 1;
+          return;
+          }
+          await this.database.list(this.gpas).snapshotChanges().subscribe(async data =>
+            {
+              
+              await this.updateGPAS(data);
+              await  this.database.list(this.averagePath).snapshotChanges().subscribe(async data =>
+                {
+                  
+                  await this.updateAverageDetails(data[0].payload.val());
+               
+                  ////console.log("AV")
+                  ////console.log(this.branchAverage)
+                });
+                
+                await this.router.navigate(['result'])
+             // ////console.log("GPAS")
+             // ////console.log(data)
+            }
+          );
           
           //This callback function is only exceuted once async data fetching is done
         });
 
       ////console.log("Got student details")
 
-      this.database.list(this.gpas).snapshotChanges().subscribe(async data =>
-        {
-          
-          await this.updateGPAS(data);
-          
-         // ////console.log("GPAS")
-         // ////console.log(data)
-        }
-      );
       
-      this.database.list(this.averagePath).snapshotChanges().subscribe(async data =>
-        {
-          
-          await this.updateAverageDetails(data[0].payload.val());
-       
-          ////console.log("AV")
-          ////console.log(this.branchAverage)
-        }
+      
+     
 
                   
 
-      );
-      if( this.studentDetails.length == 0)
-      {//console.log("Empty");
-      this.error=true;
-      this.loading = false;
-      return;
-
-      }
-    this.studentDetails = []
-    this.router.navigate(['result'])
+ 
+    
       
 
     }      

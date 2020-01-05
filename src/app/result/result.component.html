@@ -1,85 +1,106 @@
-<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+<link
+  href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"
+  rel="stylesheet"
+/>
+<link
+  href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+  rel="stylesheet"
+/>
 <script src="/public/node_modules/chart.js/dist/Chart.js"></script>
-<div name="displayData1"  >
-  <div class="container" >
-      <div class="row">
-        <div class="col-sm-12">
-                <mat-card class="mat-card-d shadow p-3 bg-white rounded">
-                    <div class="mat-subheading-1"> Name</div>
-                <div name="name-now" class="mat-title name-card" >{{name}}</div>
-                </mat-card>
-        </div>
+<div name="displayData1">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <mat-card class="mat-card-d shadow p-3 bg-white rounded">
+          <div class="mat-subheading-1">Name</div>
+          <div name="name-now" class="mat-title name-card">{{ name }}</div>
+        </mat-card>
       </div>
-      <table style="width: 100%;padding: 5px">
-        <tr>
-          <td>
+    </div>
+    <table style="width: 100%;padding: 5px">
+      <tr>
+        <td>
           <div flex="">
-              <mat-card class="top-card">
-                  <div class="mat-subheading-1"> Your SGPA</div>
-                  <mat-card-content class="top-content" name="SGPA-now" style="">{{sgpa}}</mat-card-content>
-              </mat-card>
+            <mat-card class="top-card">
+              <div class="mat-subheading-1">Your SGPA</div>
+              <mat-card-content class="top-content" name="SGPA-now" style="">{{
+                sgpa
+              }}</mat-card-content>
+            </mat-card>
           </div>
         </td>
-        
-     <!--    <td>
-            <div flex="">
-                    <mat-card class="card shadow  p-3 bg-white rounded" style="min-height: 100px;min-width: 100px; padding:5px;margin:10px">
-                        <div class="mat-subheading-2"> Your CGPA</div>
-                        <mat-card-content name="avgSGPA-now" style="text-align:center; float:left;font-size: 50px">{{cgpa}}</mat-card-content>
-                    </mat-card>
-                </div>
-              </td>
-     -->     
-            <td>
-         <div flex="">
-                  <mat-card class="top-card" >
-                      <div class="mat-subheading-1"> Avg. branch SGPA</div>
-                      <mat-card-content class="top-content" name="avgSGPA-now" style="">{{averageSGPA}}</mat-card-content>
-                  </mat-card>
+
+        <td>
+          <div flex="" (click)="open(mymodal)">
+            <mat-card class="top-card">
+              <div class="mat-subheading-1">
+                Average Branch GPA (this sem)
+                <!-- <i class="fa fa-info-circle" aria-hidden="true"></i> -->
               </div>
-            </td>
-          
-              
-                  <td>
-              <div flex="">
-                      <mat-card class="top-card" >
-                          <div class="mat-subheading-1"> Your rank</div>
-                          <mat-card-content class="top-content" name="rank-now" style="">{{rank}}</mat-card-content>
-                      </mat-card>
-                  </div>
-                </td>
-              </tr>
-                </table>
+              <table>
+                <tr>
+                  <mat-card-content
+                    class="top-content"
+                    name="avgSGPA-now"
+                    style="margin:0 !important"
+                    >{{ averageSGPA }}</mat-card-content
+                  >
+                </tr>
+                <tr>
+                  Click for stats
+                  <i class="fa fa-info-circle" aria-hidden="true"></i>
+                </tr>
+              </table>
+            </mat-card>
+          </div>
+        </td>
+
+        <td>
+          <div flex="">
+            <mat-card class="top-card">
+              <div class="mat-subheading-1">Your rank</div>
+              <mat-card-content class="top-content" name="rank-now" style="">{{
+                rank
+              }}</mat-card-content>
+            </mat-card>
+          </div>
+        </td>
+      </tr>
+    </table>
   </div>
 
-
-  <mat-card class="mat-card-d"  style="margin-bottom: 100px" >
-
-      <div class="container">
-
-          <div class="row" style="text-align: -webkit-center">
-          
-            <table >
-             
-              <tr *ngFor="let d of subs">
-                <td align="center" style="color: black">
-                  <mat-card>
-                   <div style="height: 40px;vertical-align: middle">
-                    <div id="float1" style="text-align:center;vertical-align:middle;width:75%;float:left;">{{d[0]}}</div>
-                    <div id="float1" style="text-align:center;width:25%;float:left;font-size: 50px">{{d[1]}}</div>
+  <mat-card class="mat-card-d" style="margin-bottom: 100px">
+    <div class="container">
+      <div class="row" style="text-align: -webkit-center">
+        <table>
+          <tr *ngFor="let d of subs">
+            <td align="center" style="color: black">
+              <mat-card
+                style="display: inline-block; min-width: 85%; max-width: 85%;"
+              >
+                <div style="height: 40px;vertical-align: middle">
+                  <div
+                    id="float1"
+                    style="text-align:center;vertical-align:middle;width:75%;float:left;display: inline-block;"
+                  >
+                    {{ d[0] }}
                   </div>
-                  </mat-card>
-                  </td>
-                
-              </tr>
-            
-            </table>
-          </div>
-          <div>
-              <canvas #canvas id="canvas">{{ canvas }}</canvas>
-          </div>
+                  <div
+                    id="float1"
+                    style="text-align:center;width:25%;float:left;font-size: 50px"
+                  >
+                    {{ d[1] }}
+                  </div>
+                </div>
+              </mat-card>
+            </td>
+          </tr>
+        </table>
       </div>
-  
+      <div>
+        <canvas #canvas id="canvas">{{ canvas }}</canvas>
+      </div>
+    </div>
   </mat-card>
 </div>
 <style>
@@ -93,8 +114,61 @@
     text-align: center;
     padding: 2px;
   }
-  </style>
-  
-  <div class="footer">
-    <p>Created by Nagendra Kumar Jamadagni and Shashank Holla</p>
-  </div> 
+</style>
+<ng-template #mymodal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title" style="color:black">
+      Average Stats
+    </h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body" style="color: black;">
+    <div class="row" style="text-align: -webkit-center">
+      <table>
+        <tr *ngFor="let d of averageCourse">
+          <td align="center" style="color: black">
+            <mat-card>
+              <div style="height: 40px;vertical-align: middle">
+                <div
+                  id="float1"
+                  style="text-align:center;vertical-align:middle;width:75%;float:left;"
+                >
+                  {{ d[0].subject }}
+                </div>
+                <div
+                  id="float1"
+                  style="text-align:center;vertical-align:middle;width:25%;float:left;font-size: 50px"
+                >
+                  {{ d[0].grade }}
+                </div>
+              </div>
+            </mat-card>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- <div *ngFor="let d of averageCourse">
+      {{ d[0].subject }} == {{ d[0].grade }}
+    </div> -->
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-outline-dark"
+      (click)="modal.close('Save click')"
+    >
+      Ok
+    </button>
+  </div>
+</ng-template>
+<div class="footer">
+  <p>Created by Nagendra Kumar Jamadagni and Shashank Holla</p>
+</div>

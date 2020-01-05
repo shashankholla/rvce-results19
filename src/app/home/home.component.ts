@@ -163,5 +163,6 @@ export class HomeComponent implements OnInit {
     this.dbPath="/data/" + semester+"/"+this.selectedBranch+"/"+"1RV"+this.selectedYear+branchCode+this.usnNo;
     this.averagePath = "/data/"+semester+"/"+this.selectedBranch+"/"+"AVERAGE";
     this.gpas = "/gpas/" + semester + "/" + this.selectedBranch;
+    console.log(this.dbPath);
   }
 }

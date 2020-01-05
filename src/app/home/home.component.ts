@@ -119,20 +119,21 @@ export class HomeComponent implements OnInit {
     this.sharedService.changeAvg(data);
   }
   getPath() {
-    var semester: string;
+    var semester: string="Semester";
+    var semesterNumber:number;
     var branchCode: string;
     switch (this.selectedYear) {
       case "15":
-        semester = "Semester8";
+        semesterNumber=8;
         break;
       case "16":
-        semester = "Semester6";
+        semesterNumber=6;
         break;
       case "17":
-        semester = "Semester4";
+        semesterNumber=4;
         break;
       case "18":
-        semester = "Semester2";
+        semesterNumber=2;
         break;
     }
     switch (this.selectedBranch) {
@@ -173,6 +174,11 @@ export class HomeComponent implements OnInit {
         branchCode = "ME";
         break;
     }
+    
+    var number:number=Number(this.usnNo);
+    if(number>=400)
+      semesterNumber=semesterNumber+2;
+      semester=semester+semesterNumber;
 
     this.dbPath =
       "/data/" +

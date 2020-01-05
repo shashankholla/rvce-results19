@@ -11,7 +11,7 @@
 .top-card
 {
     padding: 3px;
-   min-height:70px;
+    overflow:auto; 
 }
 .top-content{
     text-align:center; 
